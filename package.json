@@ -1,7 +1,7 @@
 {
   "name": "source-processor",
-  "version": "0.0.2",
-  "description": "Track the textual position of json elements within a text, and validate a json against a JSON schema, with colomn and row error reporting",
+  "version": "0.0.3",
+  "description": "Typescript tools for parsing, validating and error reporting for source code written in JSON or YAML",
   "keywords": [
     "jquery-plugin"
   ],
