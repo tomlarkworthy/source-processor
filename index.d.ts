@@ -235,8 +235,8 @@ export class SourceFile {
 }
 export class TextLocation {
     public position: number;
-    public col: number;
-    public row: number;
+    public col(): number;
+    public row(): number;
     constructor(position: number);
 }
 export class TextSpan {

@@ -1,6 +1,6 @@
 {
   "name": "source-processor",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Typescript tools for parsing, validating and error reporting for source code written in JSON or YAML",
   "keywords": [
     "Typescript", "source", "parse", "validate", "error", "JSON", "YAML"
