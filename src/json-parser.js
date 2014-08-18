@@ -139,20 +139,20 @@
                 next('r');
                 next('u');
                 next('e');
-                return new Json.JBoolean(true, at - 4, at);
+                return new Json.JBoolean(true, at - 5, at - 1);
             case 'f':
                 next('f');
                 next('a');
                 next('l');
                 next('s');
                 next('e');
-                return new Json.JBoolean(false, at - 5, at);
+                return new Json.JBoolean(false, at - 6, at - 1);
             case 'n':
                 next('n');
                 next('u');
                 next('l');
                 next('l');
-                return new Json.JNull(at - 4, at);
+                return new Json.JNull(at - 5, at - 1);
             }
             error("Unexpected '" + ch + "'");
         };
@@ -165,7 +165,7 @@
                 white();
                 if (ch === ']') {
                     next(']');
-                    array.setEnd(at);
+                    array.setEnd(at - 1);
                     return array;   // empty array
                 }
                 while (ch) {
@@ -173,6 +173,7 @@
                     white();
                     if (ch === ']') {
                         next(']');
+                        array.setEnd(at - 1);
                         return array;
                     }
                     next(',');
@@ -185,7 +186,7 @@
         var object = function() { // Parse an object value.
             var key;
             var result = new Json.JObject();
-            result.setStart(at);
+            result.setStart(at - 1);
 
             if (ch === '{') {
                 next('{');
@@ -211,8 +212,8 @@
 
                     white();
                     if (ch === '}') {
-                        next('}');
                         result.setEnd(at);
+                        next('}');
                         return result;
                     }
                     next(',');
@@ -234,10 +235,10 @@
                 case '"':
                     return new Json.JString(string(), start_pos, at);
                 case '-':
-                    return new Json.JNumber(number(), start_pos, at);
+                    return new Json.JNumber(number(), start_pos, at - 1);
                 default:
                     if (ch >= '0' && ch <= '9') {
-                        return new Json.JNumber(number(), start_pos, at);
+                        return new Json.JNumber(number(), start_pos, at - 1);
                     } else {
                         return word();
                     }

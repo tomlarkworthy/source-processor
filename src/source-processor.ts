@@ -23,43 +23,6 @@ export class SourceFile {
     constructor(text: string) {
         this.text = text;
     }
-    /**
-     * taken from greatjson, its somewhat inefficient, doing a loop through the text each time
-     */
-
-    getLineColumn(position: number): Position {
-        return new Position(1,0);
-        /*
-        var result = {
-            line: 1,
-            column: 0
-        };
-        var n, r, lastColumn1 = 0;
-        for (;;) {
-            // find next '/n' and '/r'
-            if (n == null && (n = this.text.indexOf('\n', lastColumn1)) >= position) n = -1;
-            if (r == null && (r = this.text.indexOf('\r', lastColumn1)) >= position) r = -1;
-            if (n == -1 && r == -1) break;
-
-            // check if next linebreak is '/n'
-            if (n != -1 && (n < r || r == -1)) {
-                result.line++;
-                lastColumn1 = n + 1;
-                n = null
-            } else if (r != -1 && (r < n || n == -1)) {
-                result.line++;
-                lastColumn1 = r + 1;
-                if (n == r + 1) {
-                    n = null;
-                    lastColumn1++
-                }
-                r = null
-            }
-        }
-        result.column = position - lastColumn1 + 1;
-
-        return result*/
-    }
 }
 var current_text: SourceFile;
 
@@ -69,18 +32,67 @@ var current_text: SourceFile;
 
 export class TextLocation {
     position: number;
-    col: number;
-    row: number;
+    text: string;
 
     constructor(position: number) {
         this.position = position;
         if (current_text != null) {
-            var lineCol = current_text.getLineColumn(position);
-            this.col = lineCol.column;
-            this.row = lineCol.line
+            this.text = current_text.text
         } else {
             console.error("no text document defined, this better running during testing!!!")
         }
+    }
+
+    col(): number {
+        var n, r, line = 1, column = 0;
+        for (;;) {
+            // find next '/n' and '/r'
+            if (n == null && (n = this.text.indexOf('\n', column)) >= this.position) n = -1;
+            if (r == null && (r = this.text.indexOf('\r', column)) >= this.position) r = -1;
+            if (n == -1 && r == -1) break;
+
+            // check if next linebreak is '/n'
+            if (n != -1 && (n < r || r == -1)) {
+                line++;
+                column = n + 1;
+                n = null
+            } else if (r != -1 && (r < n || n == -1)) {
+                line++;
+                column = r + 1;
+                if (n == r + 1) {
+                    n = null;
+                    column++
+                }
+                r = null
+            }
+        }
+        return this.position - column + 1;
+    }
+
+    row(): number {
+        var n, r, line = 1, column = 0;
+        for (;;) {
+            // find next '/n' and '/r'
+            if (n == null && (n = this.text.indexOf('\n', column)) >= this.position) n = -1;
+            if (r == null && (r = this.text.indexOf('\r', column)) >= this.position) r = -1;
+            if (n == -1 && r == -1) break;
+
+            // check if next linebreak is '/n'
+            if (n != -1 && (n < r || r == -1)) {
+                line++;
+                column = n + 1;
+                n = null
+            } else if (r != -1 && (r < n || n == -1)) {
+                line++;
+                column = r + 1;
+                if (n == r + 1) {
+                    n = null;
+                    column++
+                }
+                r = null
+            }
+        }
+        return line
     }
 }
 

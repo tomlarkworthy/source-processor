@@ -36,7 +36,8 @@ module.exports = function (grunt) {
       },
     },
     nodeunit: {
-      files: ['test/**/*_test.js']
+      files: ['test/**/*_test.js'],
+      parser: ['test/parser_test.js']
     },
     jshint: {
       options: {
