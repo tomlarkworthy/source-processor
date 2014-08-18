@@ -1,9 +1,9 @@
 {
   "name": "source-processor",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Typescript tools for parsing, validating and error reporting for source code written in JSON or YAML",
   "keywords": [
-    "jquery-plugin"
+    "Typescript", "source", "parse", "validate", "error", "JSON", "YAML"
   ],
   "homepage": "https://github.com/tomlarkworthy/source-processor",
   "bugs": "https://github.com/tomlarkworthy/source-processor/issues",
