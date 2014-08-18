@@ -1,0 +1,9 @@
+/node_modules/
+src/.jshintrc
+src/error.d.ts
+*.js.map
+src/source-processor.d.ts
+.idea
+.editorconfig
+.jshintrc
+src/util/Collections.d.ts
