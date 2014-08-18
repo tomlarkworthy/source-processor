@@ -82,14 +82,6 @@ module.exports = function (grunt) {
         }
       }
     },
-
-    //'tpm-install': {
-    // options: {dev: true},
-    //  all: {src: 'package.json', dest: 'types/'}
-    //},
-    //'tpm-index': {
-    //  all: {src: ['types/**/*.d.ts'], dest: 'types/all.d.ts'}
-    //}
     typescript_export: {
       base: {
         src: ['src/*.d.ts'],
@@ -98,15 +90,10 @@ module.exports = function (grunt) {
     },
   });
 
-
-  //grunt.loadNpmTasks('typescript-tpm');
-  //grunt.loadNpmTasks('grunt-typescript-export');
-
   // Default task.
   grunt.registerTask('default', ['jshint', 'nodeunit', 'concat', 'uglify']);
 
   grunt.registerTask('compile',['typescript:base']);
-  //grunt.registerTask("tpm", ['tpm-install', 'tpm-index'])
 
   grunt.registerTask('export',["typescript_export:base"]);
 };
