@@ -341,14 +341,14 @@ export class JObject extends JValue {
 
 
 export function parse(text: string): JValue{
-    current_text = new SourceFile(text);
-    return json_parser.parse(text)
+    current_text = new SourceFile(text.toString());
+    return json_parser.parse(text.toString())
 }
 
 
 export function parse_yaml(text: string): JValue{
-    current_text = new SourceFile(text);
-    var plain_json = js_yaml.load(text, 'utf8');
+    current_text = new SourceFile(text.toString());
+    var plain_json = js_yaml.load(text.toString(), 'utf8');
     //var jsyaml_json = js_yaml.loader.last_popped.toJSON();
     //console.log(JSON.stringify(plain_json));
     //console.log(JSON.stringify(jsyaml_json));
@@ -357,7 +357,7 @@ export function parse_yaml(text: string): JValue{
 }
 
 export function parse_yaml_collection(text: string, callback: (json: JValue) => any) {
-    js_yaml.loadAll(text, function (json: any) {
+    js_yaml.loadAll(text.toString(), function (json: any) {
         callback(parse(JSON.stringify(json)));
     },'utf8');
 }

@@ -4,7 +4,7 @@ import fs = require('fs');
 import Json = require('../src/source-processor');
 
 export function testParseJson(test:nodeunit.Test): void {
-    var json: Json.JValue = Json.parse(fs.readFileSync("test/parser_test.json", {encoding: 'utf8'}).toString());
+    var json: Json.JValue = Json.parse(fs.readFileSync("test/parser_test.json", {encoding: 'utf8'}));
 
     //console.log(JSON.stringify(json, null, 4));
 
@@ -54,8 +54,16 @@ export function testParseJson(test:nodeunit.Test): void {
     test.done();
 }
 
+
+export function parseBasicJson(test:nodeunit.Test): void {
+    //reading the data using our custom js-yaml parser
+    var json: Json.JValue = Json.parse(fs.readFileSync("test/basic.json"));
+    console.log(json.toJSON());
+    test.done();
+}
+
 export function testParseYaml(test:nodeunit.Test): void {
-    var json: Json.JValue = Json.parse_yaml(fs.readFileSync("test/complicated.yaml", {encoding: 'utf8'}).toString());
+    var json: Json.JValue = Json.parse_yaml(fs.readFileSync("test/complicated.yaml", {encoding: 'utf8'}));
 
     //console.log(JSON.stringify(json, null, 4));
 
